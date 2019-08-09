@@ -22,6 +22,10 @@ class User {
     return $this->username;
   }
 
+  public function password(){
+    return $this->password;
+  }
+
   public function keyuser(){
     return $this->keyuser;
   }

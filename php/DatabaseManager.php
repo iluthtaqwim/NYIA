@@ -1,6 +1,8 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors","On");
+session_start();
+
 include 'koneksi.php';
 include 'Keterangan.php';
 include 'HistoryManager.php';
@@ -16,6 +18,18 @@ function AddHistory($username,$pass,$keterangan,$keyuser){
     unset($history);
 }
 
+function GetHistory(){
+  $userdata = CekUser(GetUsername(),GetPassword());
+  $history = new HistoryManager;
+  $conn = BuatKoneksi();
+  $history->GetHistory();
+  TutupKoneksi($conn);
+  unset($history);
+}
+
+//Cekuser akan mengembalikan data dari datqauser berupa segala sesuatu yang ada di username
+// $_user = Cekuser(username,password)
+//if($user!=null) dapat diambil $user->name() dll seperti di object data user
 function CekUser($username,$pass){
   $du = new DataUser;
   $conn = BuatKoneksi();
@@ -27,11 +41,31 @@ function CekUser($username,$pass){
   }else {
     TutupKoneksi($conn);
     unset($du);
+    $_SESSION["username"] = $user->username();
+    $_SESSION["password"] = $user->password();
     return $user;
   }
-
 }
 
-//AddHistory("das","dasd",1,"Das");
-CekUser("ekacahyo","test");
+function GetUsername(){
+  return $_SESSION["username"];
+}
+
+function GetPassword(){
+  return $_SESSION["password"];
+}
+
+function AddNewNodin($conn,$namamitra,$namakontrak,$tglkontrak,$file){
+  $upload = new Upload;
+  $link = $upload->Data($file);
+  if($link!=null){
+    $userdata = CekUser(GetUsername(),GetPassword());
+    AddNodin($conn,$userdata,$namamitra,$namakontrak,$tglkontrak,$link);
+  }else {
+    echo "Error upload file";
+  }
+}
+// CekUser("ekacahyo","test");
+// echo GetUsername();
+
 ?>

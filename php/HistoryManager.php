@@ -30,5 +30,23 @@ class HistoryManager{
     return !$conn->query($sql);
   }
 
+  public function GetHistory($conn,$keyuser){
+    $sql = "SELECT * FROM history   WHERE keyuser = '$keyuser'";
+    $result = $conn->query($sql);
+    if (!$result) {
+      trigger_error('Invalid query: ' . $conn->error);
+    }
+    if ($result->num_rows > 0) {
+      $listhistory = [];
+      while($row = $result->fetch_assoc()) {
+          // $listhistory[] = ;
+      }
+      return $listhistory;
+    }else {
+      unset($_data);
+      return null;
+    }
+  }
+
 }
  ?>
