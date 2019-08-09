@@ -1,5 +1,47 @@
 <?php
+class History{
+  public function __construct($no,$username,$pass,$ip,$date,$ket,$keyuser){
+    $this->no = $no;
+    $this->username = $username;
+    $this->password = $pass;
+    $this->ip = $ip;
+    $this->date = $date;
+    $this->ket = $ket;
+    $this->keyuser = $keyuser;
+  }
+
+  public function no(){
+    return $this->no;
+  }
+
+  public function username()[
+    return $this->username;
+  ]
+
+  public function password(){
+    return $this->password;
+  }
+
+  public function ip(){
+    return $this->ip;
+  }
+
+  public function date(){
+    return $this->date;
+  }
+
+  public function ket(){
+    return $this->ket;
+  }
+
+  public function keyuser(){
+    return $this->keyuser;
+  }
+
+}
+
 class HistoryManager{
+
   function GetIp(){
     if(!empty($_SERVER['HTTP_CLIENT_IP'])){
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -31,7 +73,7 @@ class HistoryManager{
   }
 
   public function GetHistory($conn,$keyuser){
-    $sql = "SELECT * FROM history   WHERE keyuser = '$keyuser'";
+    $sql = "SELECT * FROM history WHERE keyuser = '$keyuser'";
     $result = $conn->query($sql);
     if (!$result) {
       trigger_error('Invalid query: ' . $conn->error);
@@ -39,7 +81,7 @@ class HistoryManager{
     if ($result->num_rows > 0) {
       $listhistory = [];
       while($row = $result->fetch_assoc()) {
-          // $listhistory[] = ;
+           $listhistory[] = new History($row ["no"],$row ["username"],$row ["pass"],$row ["ip"],$row ["date"],$row ["ket"],$row ["keyuser"]);
       }
       return $listhistory;
     }else {

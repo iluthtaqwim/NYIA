@@ -8,6 +8,10 @@ include 'Keterangan.php';
 include 'HistoryManager.php';
 include 'DataUser.php';
 
+function AllowAcces(){
+  return isset($_SESSION["username"]) && isset($_SESSION["password"]);
+}
+
 //cara pake AddHistory(username,password,keterangan,keyuser);
 //keterangan = Keterangan::Blasbala;
 function AddHistory($username,$pass,$keterangan,$keyuser){
@@ -23,8 +27,15 @@ function GetHistory(){
   $history = new HistoryManager;
   $conn = BuatKoneksi();
   $history->GetHistory();
-  TutupKoneksi($conn);
-  unset($history);
+  if($history.count()>0){
+    TutupKoneksi($conn);
+    return $history;
+  }else {
+    TutupKoneksi($conn);
+    unset($history);
+    return null;
+  }
+
 }
 
 //Cekuser akan mengembalikan data dari datqauser berupa segala sesuatu yang ada di username
@@ -55,6 +66,10 @@ function GetPassword(){
   return $_SESSION["password"];
 }
 
+function Logout(){
+  session_destroy();
+}
+
 function AddNewNodin($conn,$namamitra,$namakontrak,$tglkontrak,$file){
   $upload = new Upload;
   $link = $upload->Data($file);
@@ -65,7 +80,4 @@ function AddNewNodin($conn,$namamitra,$namakontrak,$tglkontrak,$file){
     echo "Error upload file";
   }
 }
-// CekUser("ekacahyo","test");
-// echo GetUsername();
-
 ?>
