@@ -8,70 +8,11 @@ if (isset($_POST['tampil'])) {
 $bln = date('m');
 $thn = '2017';
 $thn_now = date('Y');
-
-if ($bln == 1) {
-  $a = 'selected';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='';
-  # code...
-} elseif ($bln == 2) {
-  # code...
-  $a = '';  $b ='selected';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='';
-}  elseif ($bln == 3) {
-  # code...
-  $a = '';  $b ='';  $c ='selected';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='';
-} elseif ($bln == 4) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='selected';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='';
-} elseif ($bln == 5) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='selected';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='';
-} elseif ($bln == 6) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='selected';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='';
-} elseif ($bln == 7) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='selected';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='';
-} elseif ($bln == 8) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='selected';  $i ='';  $j ='';  $k ='';  $l ='';
-} elseif ($bln == 9) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='selected';  $j ='';  $k ='';  $l ='';
-} elseif ($bln == 10) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='selected';  $k ='';  $l ='';
-} elseif ($bln == 11) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='selected';  $l ='';
-} elseif ($bln == 12) {
-  # code...
-  $a = '';  $b ='';  $c ='';  $d ='';  $e ='';  $f ='';
-  $g ='';  $h ='';  $i ='';  $j ='';  $k ='';  $l ='selected';
-} 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../dist/css/bootstrap.css">
-    <title>Document</title>
-</head>
-<body>
+
     <div style="text-align: center">
-        <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width: 40%; margin-bottom: 5%" alt="" srcset="">
+        <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width: 20%; margin-bottom: 5%" alt="" srcset="">
     </div>
     <div class="card">
         <div class="card-header" style="text-align: center">
@@ -152,5 +93,3 @@ if ($bln == 1) {
             </table>
         </div>
     </div>
-</body>
-</html>
