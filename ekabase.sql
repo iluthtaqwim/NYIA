@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 09 Agu 2019 pada 04.39
+-- Waktu pembuatan: 09 Agu 2019 pada 06.36
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -62,13 +62,24 @@ CREATE TABLE `data_link` (
 
 CREATE TABLE `history` (
   `no` int(11) NOT NULL,
-  `username` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pass` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ip` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp(),
   `ket` int(11) NOT NULL,
   `keyuser` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `history`
+--
+
+INSERT INTO `history` (`no`, `username`, `pass`, `ip`, `date`, `ket`, `keyuser`) VALUES
+(5, 'das', 'dasd', '192.168.64.1', '2019-08-09', 1, 'Das'),
+(6, 'das', 'dasd', '192.168.64.1', '2019-08-09', 1, 'Das'),
+(7, 'das', 'dasd', '192.168.64.1', '2019-08-09', 1, 'Das'),
+(8, 'das', 'dasd', '192.168.64.1', '2019-08-09', 1, 'Das'),
+(9, 'das', 'dasd', '192.168.64.1', '2019-08-09', 1, 'Das');
 
 -- --------------------------------------------------------
 
@@ -138,6 +149,7 @@ CREATE TABLE `message` (
 CREATE TABLE `user` (
   `nama` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyuser` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jabatan` int(11) NOT NULL,
   `last_login` date NOT NULL DEFAULT current_timestamp(),
@@ -150,9 +162,9 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`nama`, `username`, `keyuser`, `jabatan`, `last_login`, `register`, `status`, `kat`) VALUES
-('Eka Cahyono', 'ekacahyo', 'JOG.MB.ekacahyo', 1, '2019-08-08', '2019-08-08', 1, 2),
-('Eka Melati', 'ekamelati', 'JOG.MB.ekamelati', 1, '2019-08-08', '2019-08-08', 1, 1);
+INSERT INTO `user` (`nama`, `username`, `password`, `keyuser`, `jabatan`, `last_login`, `register`, `status`, `kat`) VALUES
+('Eka Cahyono', 'ekacahyo', 'test', 'JOG.MB.ekacahyo', 1, '2019-08-08', '2019-08-08', 1, 2),
+('Eka Melati', 'ekamelati', 'test', 'JOG.MB.ekamelati', 1, '2019-08-08', '2019-08-08', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -231,7 +243,7 @@ ALTER TABLE `data_link`
 -- AUTO_INCREMENT untuk tabel `history`
 --
 ALTER TABLE `history`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
