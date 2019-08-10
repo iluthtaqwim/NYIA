@@ -6,9 +6,10 @@
 ?>
 <div>
     <div style="" class="card">
-        
-        <div class="card-body">
-            <h1 style="text-align:center " class="card-title">HISTORY</h1>
+        <div class="card-header" style="text-align: center">
+            <h1>HISTORY</h1>
+        </div>
+        <div class="card-body table-responsive">
             <table class="table">
                 <thead>
                     <tr>

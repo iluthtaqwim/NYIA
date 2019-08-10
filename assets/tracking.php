@@ -1,14 +1,16 @@
-
+    <?php
+      
+    ?>
     <div class="card">
         <div class="card-header" style="text-align: center">
-            <h1>HOME PREVIEW</h1>
+            <h1>TRACKING</h1>
         </div>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" style="width:10%" data-toggle="modal" data-target="#exampleModal">
   Add Data
 </button>
-        <div class="card-content">
-            <table class="table table-striped">
+        <div class="card-content table-responsive">
+            <table class="table table-striped" >
                 <thead class="thead-inverse">
                     <tr>
                         <th>No</th>
