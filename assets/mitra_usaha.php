@@ -5,7 +5,14 @@
 ?>
 <div>
     <div>
-        <div class="card">
+        
+                      <?php 
+                       
+function Tabul($t,$idpo){
+    $mitra = GetBerkasPerusahaan();
+    if($t){
+        echo' 
+ <div class="card">
             <div class="card-header" style="text-align: center">
                  <h1>MITRA USAHA</h1>
                  <button type="button" class="btn btn-primary" style="width:20%" data-toggle="modal" data-target="#modalMitra">
@@ -13,14 +20,7 @@
                 </button>
             </div>
             <div class="card-body">
-                <!-- Table mitra usaha -->
-               
-                       <?php 
-                       
-function Tabul($t,$idpo){
-    if($t){
-        $mitra = GetBerkasPerusahaan();
-        echo' <table class="table" style ="margin-bottom: 20px;">
+<table class="table" style ="margin-bottom: 20px;">
             <thead>
                 <tr>
                     <th>NO</th>
@@ -29,16 +29,27 @@ function Tabul($t,$idpo){
                 </tr>
             </thead>
             <tbody>';
+            $aaa = 0;
         foreach($mitra as $mitr){
+            $aaa++;
             $namper = $mitr->NamaPerusahaan();
             $nampert = false;
-            
-               echo "
-               <tr>
-                <td scope='row'>1</td>
+            // if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') 
+            //         $link = "https"; 
+            //     else
+            //         $link = "http"; 
+                  
+            //     $link .= "://"; 
+            //     $link .= $_SERVER['HTTP_HOST']; 
+              //  $link .= $_SERVER['REQUEST_URI']; 
+            $juju = $mitr->IdKeyPerusahaan();
+            $link ="/assets/index.php?assets=mitra&id_perusahaan=".$juju;
+              echo "
+              <tr>
+                <td scope='row'>$aaa</td>
                 <td>
-                    <div class='rincian' data-toggle='modal' data-target='#rincian' >
-                    $namper
+                    <div class='rincian' >
+                    <a href='$link'>$namper</a>
                     </div>
                 </td>
                 <td>";
@@ -48,24 +59,32 @@ function Tabul($t,$idpo){
                 }else {
                     echo "<button class='btn btn-danger' disabled type='submit'><i class='fa fa-times' aria-hidden='true'></i></button>";
                 }
-           echo "
+          echo "
                 </td>
             </tr>";
             
         }
         echo'</tbody>
-            </table>';
+            </table>
+            </div>
+        </div>';
     }else{
+        $datane;
+        foreach($mitra as $mitr){
+            if($mitr->IdKeyPerusahaan()==$_GET['id_perusahaan']){
+                $datane = $mitr;
+            }
+        }
+        $namper = $datane->NamaPerusahaan();
+        $filePerusahanae = $datane->FilePerusahaan();
         echo '  
-        
-        ';
-    }
-                       }
-                       Tabul(false,"");
-                       
-                       ?>
-                       
-                       <div class="menu" style="display:none">
+        <div class="card">
+            <div class="card-header" style="text-align: center">';
+                 echo"<h1>$namper</h1>";
+        echo'
+            </div>
+            <div class="card-body">
+                <!-- Table mitra usaha -->
         <table class="table">
             <thead>
                 <tr>
@@ -80,21 +99,32 @@ function Tabul($t,$idpo){
             </thead>
             <tbody>
                 <tr>
-                    <td scope="row"></td>
+                    <td scope="row">1</td>
                     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></a></td>
                     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
                     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
                     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                    <td>(tulisane kurang apik wkwk)</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
                 </tr>
             </tbody>
         </table>
         </div>
-                <!-- Table keterangan perusahaan -->
-            </div>
-            <?php tablePerusahaanMitra();?>
         </div>
+        ';
+    }
+                      }
+                      
+                       if(isset($_GET['id_perusahaan'])){
+                           Tabul(false,$_GET['id_perusahaan']);
+                       }else{
+                           Tabul(true,"");
+                       }
+                      ?>
+                     
+                <!-- Table keterangan perusahaan -->
     </div>
+            <?php tablePerusahaanMitra();?>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script type="text/javascript">

@@ -1,15 +1,13 @@
 <?php
 
 //AddHistory(GetUsername(),GetPassword(),Keterangan::MASUK_PORTAL,$user->keyuser());
-    $history = GetHistory();
     
 ?>
 <div>
     <div style="" class="card">
-        <div class="card-header" style="text-align: center">
-            <h1>HISTORY</h1>
-        </div>
-        <div class="card-body table-responsive">
+        
+        <div class="card-body">
+            <h1 style="text-align:center " class="card-title">HISTORY</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -23,6 +21,7 @@
                 <tbody>
                     <?php 
                     $e = 0;
+                    $history = GetHistory();
                     foreach($history as $hist){
                         $e++;
                             tableHistory($hist,$e);
