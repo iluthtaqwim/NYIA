@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 09 Agu 2019 pada 06.36
+-- Waktu pembuatan: 10 Agu 2019 pada 08.19
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -41,6 +41,33 @@ CREATE TABLE `data` (
   `status` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data untuk tabel `data`
+--
+
+INSERT INTO `data` (`no`, `date`, `link_id`, `upload_by`, `send_to`, `name_doc`, `ket_doc`, `tgl_contract`, `link_con`, `status`) VALUES
+(2, '2019-08-09', 'test', 'JOG.MB.ekacahyo', 'Legal', 'Coba', 'Coba', '2019-08-10', 'notset', 0),
+(3, '2019-08-09', 'test', 'JOG.MB.ekacahyo', 'Legal', 'Coba', 'Coba', '2019-08-10', 'notset', 0),
+(4, '2019-08-09', 'test', 'JOG.MB.ekacahyo', 'Legal', 'Coba', 'Coba', '2019-08-10', 'notset', 0),
+(5, '2019-08-09', 'key%500%ekacahyo%500%3', 'JOG.MB.ekacahyo', 'Legal', 'Coba', 'Coba', '2019-08-10', 'notset', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `data_berkas`
+--
+
+CREATE TABLE `data_berkas` (
+  `no` int(11) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `id_key_perusahaan` varchar(225) NOT NULL,
+  `id_key_berkas` int(11) NOT NULL,
+  `id_key_jenis` int(11) NOT NULL,
+  `link_berkas` varchar(225) NOT NULL,
+  `status` int(11) NOT NULL,
+  `expired` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +80,33 @@ CREATE TABLE `data_link` (
   `link` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `data_link`
+--
+
+INSERT INTO `data_link` (`no`, `link_id`, `link`, `date`) VALUES
+(1, 'test', '../uploaddata/2019-08-10-02-57-33-bab.jpg', '2019-08-09'),
+(2, 'key%500%ekacahyo%500%3', '../uploaddata/2019-08-10-02-58-28-bab.jpg', '2019-08-09'),
+(3, 'key%500%ekacahyo%500%3', '../uploaddata/2019-08-10-03-13-04-bab.jpg', '2019-08-09'),
+(4, 'key%500%ekacahyo%500%3', '../uploaddata/2019-08-10-03-22-46-bab.jpg', '2019-08-09'),
+(5, 'key%500%ekacahyo%500%3', 'fafs', '2019-08-10'),
+(6, 'key%500%ekacahyo%500%3', 'fafs', '2019-08-10'),
+(7, 'key%500%ekacahyo%500%3', 'fafs', '2019-08-10');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `data_perusahaan`
+--
+
+CREATE TABLE `data_perusahaan` (
+  `no` int(50) NOT NULL,
+  `nama_perusahaan` varchar(225) NOT NULL,
+  `id_key_perusahaan` varchar(50) NOT NULL,
+  `statsus` int(11) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -135,10 +189,18 @@ CREATE TABLE `message` (
   `tgl` date NOT NULL DEFAULT current_timestamp(),
   `upload_by` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `send_to` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_data` int(11) NOT NULL,
+  `value` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_data` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_message` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `message`
+--
+
+INSERT INTO `message` (`no`, `tgl`, `upload_by`, `send_to`, `value`, `id_data`, `id_message`) VALUES
+(1, '2019-08-09', 'JOG.MB.ekacahyo', 'Sales', 'Haallo World', 'key%500%ekacahyo%500%3', 0),
+(2, '2019-08-10', 'JOG.MB.ekacahyo', 'Sales', 'Kurang', 'key%500%ekacahyo%500%3', 0);
 
 -- --------------------------------------------------------
 
@@ -180,11 +242,25 @@ ALTER TABLE `data`
   ADD KEY `tgl_cat` (`tgl_contract`);
 
 --
+-- Indeks untuk tabel `data_berkas`
+--
+ALTER TABLE `data_berkas`
+  ADD PRIMARY KEY (`no`),
+  ADD KEY `key_berkas` (`id_key_berkas`);
+
+--
 -- Indeks untuk tabel `data_link`
 --
 ALTER TABLE `data_link`
   ADD PRIMARY KEY (`no`),
   ADD KEY `link_id` (`link_id`);
+
+--
+-- Indeks untuk tabel `data_perusahaan`
+--
+ALTER TABLE `data_perusahaan`
+  ADD PRIMARY KEY (`no`),
+  ADD KEY `key_perusahaan` (`id_key_perusahaan`);
 
 --
 -- Indeks untuk tabel `history`
@@ -231,13 +307,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `data`
 --
 ALTER TABLE `data`
-  MODIFY `no` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `no` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `data_berkas`
+--
+ALTER TABLE `data_berkas`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_link`
 --
 ALTER TABLE `data_link`
-  MODIFY `no` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `no` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `data_perusahaan`
+--
+ALTER TABLE `data_perusahaan`
+  MODIFY `no` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `history`
@@ -261,7 +349,7 @@ ALTER TABLE `keterangan`
 -- AUTO_INCREMENT untuk tabel `message`
 --
 ALTER TABLE `message`
-  MODIFY `no` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `no` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
