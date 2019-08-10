@@ -12,26 +12,21 @@
     <div class="row ">
       <div class="col-xs-0 col-md-4"></div>
       <div class="col-xs-12 col-md-4 container" >
-        <div class="card text-center bg-primary">
+        <div class="card text-center" style="background-color:skyblue">
             <div class="card-body">
             <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width:100%; padding:5% 5% 10% 5%" alt="" srcset="">
                 <form action="" method="post">
                     <div class="row" style="padding-bottom: 20px">
-                        <div class="col-md-3 col-xs-12">
-                            <p>Username</p>
-                        </div>
-                        <div class="col-md-9 col-xs-12">
-                            <input class="form-control" type="text" name="username" id="">
+
+                        <div class="col-md-12 col-xs-12">
+                            <label style="color:white" for="">Username</label>
+                            <input class="form-control" type="text" name="username" id="" placeholder="Username">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 col-xs-12">
-                            
-                            <p>Password</p>
-                        </div>
-                        <div class="col-md-9 col-xs-12">
-                            
-                            <input class="form-control" type="password" name="password" id="">
+                        <div class="col-md-12 col-xs-12">
+                            <label style="color:white" for="">Password</label>
+                            <input class="form-control" type="password" name="password" id="" placeholder="Password">
                         </div>
                     </div>
                     <div style="padding-top: 20px" class="row">

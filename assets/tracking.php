@@ -1,5 +1,5 @@
     <?php
-    
+      modalAlasan();
     ?>
     <div class="card mt-5">
         <div class="card-header" style="text-align: center">
@@ -77,7 +77,7 @@
                                  <a href='$link_datass' id='bottle' ><button class='btn btn-success'><i class='fa fa-check' aria-hidden='true'></i></button></a>
                                 ";
                             }
-                            echo" <button class='btn btn-danger'><i class='fa fa-times'></i></button>";
+                            echo" <button class='btn btn-danger' data-toggle='modal' data-target='#alasan'><i class='fa fa-times'></i></button>";
                             if($con_stat==0){
                             echo"
                                 <p>Setujukah anda?</p>
