@@ -47,6 +47,7 @@ class DataManager{
   public function __construct($no,$date,$namedoc,$ketdoc,$tglcontrak,$linkconfrm,$status,$listData,$listMessage){
         $this->no = $no;
         $this->date = $date;
+        $this->namedoc = $namedoc;
         $this->ketdok = $ketdoc;
         $this->tgl_contract = $tglcontrak;
         $this->linkconfrm = $linkconfrm;
@@ -59,6 +60,10 @@ class DataManager{
   }
   public function GetDate(){
     return $this->date;
+  }
+
+  public function GetNameDoc(){
+    return $this->namedoc;
   }
   public function GetKeteranganDoc(){
     return $this->ketdok;
