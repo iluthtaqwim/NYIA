@@ -14,9 +14,9 @@ class History{
     return $this->no;
   }
 
-  public function username()[
+  public function username(){
     return $this->username;
-  ]
+  }
 
   public function password(){
     return $this->password;
@@ -78,14 +78,14 @@ class HistoryManager{
     if (!$result) {
       trigger_error('Invalid query: ' . $conn->error);
     }
+    $listhistory = array();
     if ($result->num_rows > 0) {
-      $listhistory = [];
       while($row = $result->fetch_assoc()) {
            $listhistory[] = new History($row ["no"],$row ["username"],$row ["pass"],$row ["ip"],$row ["date"],$row ["ket"],$row ["keyuser"]);
       }
       return $listhistory;
     }else {
-      unset($_data);
+      //unset($_data);
       return null;
     }
   }

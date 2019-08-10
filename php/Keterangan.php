@@ -25,4 +25,12 @@ class Keterangan extends Enum{
     const MEREVISI_NODIN = 6;
     const MENANDATANGANI_NODIN = 7;
 }
+class JENISFILE extends Enum{
+  const AKTAPENDIRIAN = 1;
+  const TDP = 2;
+  const SIUP = 3;
+  const NPWP = 4;
+  const SPPKP = 5;
+  const KTPDIREKTUR = 6;
+}
 ?>
