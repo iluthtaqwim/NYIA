@@ -299,11 +299,11 @@ class DataFile{
     $finfo = mysqli_fetch_assoc($fid_result);
     $totalrow = $finfo['COUNT(*)'];
     $id_create = "VENDOR".$totalrow;
-    $sql = "INSERT INTO `data_perusahaan`
+    $sqlw = "INSERT INTO `data_perusahaan`
     (`nama_perusahaan`, `id_key_perusahaan`, `statsus`)
     VALUES ($nama_perusahaan,$id_create,1)";
-
-    $resulte = $conn->query($sql);
+    $resulte = $conn->query($sqlw);
+    echo $totalrow ;
     if (!$resulte) {
       return false;
     }else {

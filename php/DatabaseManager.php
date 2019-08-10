@@ -79,7 +79,7 @@ function CekUser($username,$pass){
 // if(isset($_FILES['file'])){
 //   AddNewNodin($_FILES['file'],,$userdata,$namedoc,$ketdoc,$tgl);
 // }
-function AddNewNodin($file,$userdata,$namedoc,$ketdoc,$tgl){
+function AddNewNodin($file,$namedoc,$ketdoc,$tgl){
   //$conn,$namamitra,$namakontrak,$tglkontrak,
   $upload = new Upload;
   $targetfolder = "../uploaddata/notadinas/";
@@ -163,7 +163,7 @@ function TambahDataPerusahaan($namaPerusahaan){
   $dafil = new DataFile;
   $datne =  $dafil->AddDataPerusahaan($conn,$namaPerusahaan);
   TutupKoneksi($conn);
-  unset($dafil);
+  return $dafil;
 }
 function TambahBerkasPerusahaan($id_key_perusahaan,JENISFILE $id_key_jenis,$file,$expired){
   $upload = new Upload;

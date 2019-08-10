@@ -86,7 +86,7 @@ class HistoryManager{
       return $listhistory;
     }else {
       //unset($_data);
-      return null;
+      return $listhistory;
     }
   }
 

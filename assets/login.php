@@ -15,6 +15,7 @@
 
     <div class="card text-white container" style="background-color: aqua; margin-top: 7%; width: 40%; padding: 5% 0 0% 2%;" >
         <div class="card-body">
+            <form action="" method="post">
             <div class="row" style="padding-bottom: 20px">
                 <div class="col-md-6 col-xs-12">
                     <p>Username</p>
@@ -38,12 +39,13 @@
                     
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <button class="btn btn-light" type="submit">LOGIN</button>
+                    <button class="btn btn-light" name="simpan" type="submit">LOGIN</button>
                 </div>
                 <div class="col-md-4">
                     
                 </div>
             </div>
+        </form>
       </div>
     </div>
 </body>
@@ -51,3 +53,16 @@
 <script src="../dist/js/bootstrap.js"></script>
 <script src="../js/src/popover.js"></script>
 </html>
+
+<?php 
+    include '../php/DatabaseManager.php';
+
+    if(isset($_POST['username'])&& isset($_POST['password'])){
+        CekUser($_POST['username'],$_POST['password']);
+
+    }
+
+    if(AllowAcces()){
+        header("location:../assets/index.php");
+    }
+?>

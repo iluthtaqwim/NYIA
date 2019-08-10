@@ -1,16 +1,15 @@
 <?php
-    function mitra(){
-        include "../assets/table_perusahaan_mitra.php";
-    }
+    modalAddMitra();
+
 ?>
 <div>
-    <div style="text-align: center">
-        <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width: 20%; margin-bottom: 5%" alt="" srcset="">
-    </div>
     <div>
         <div class="card">
             <div class="card-header" style="text-align: center">
-                <h1>MITRA USAHA</h1>
+                 <h1>MITRA USAHA</h1>
+                 <button type="button" class="btn btn-primary" style="width:20%" data-toggle="modal" data-target="#modalMitra">
+                    Tambah Mitra
+                </button>
             </div>
             <div class="card-body">
                 <!-- Table mitra usaha -->
@@ -31,15 +30,15 @@
                                 </div>
                             </td>
                             <td>
-                                <button class="btn btn-success" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                <button class="btn btn-danger" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                <button class="btn btn-success" disabled type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger" disabled type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <!-- Table keterangan perusahaan -->
             </div>
-            <?php mitra();?>
+            <?php tablePerusahaanMitra();?>
         </div>
     </div>
 </div>
@@ -51,3 +50,10 @@
         }); 
     });
 </script>
+
+<?php 
+    // if(isset($_POST['namaPerusahaan'])){
+    //     if() echo "das";
+    // }
+    //TambahDataPerusahaan("HAKAXI");
+?>

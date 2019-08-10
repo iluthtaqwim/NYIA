@@ -1,6 +1,4 @@
-<div style="text-align: center">
-        <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width: 20%; margin-bottom: 5%" alt="" srcset="">
-</div>
+
     <div class="card">
         <div class="card-header" style="text-align: center">
             <h1>HOME PREVIEW</h1>
@@ -54,21 +52,32 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action="" method="post" enctype="multipart/form-data">
       <div class="modal-body">
-        <div class="form-group" method="post">
-          <input type="text" class="form-control" name="" id="" placeholder="Nama Mitra">
+        <div class="form-group">
+          <input type="text" class="form-control" name="namaMitra" id="" placeholder="Nama Mitra">
           <br>
-          <input type="text" class="form-control" name="" id="" placeholder="Nama Perjanjian">
+          <input type="text" class="form-control" name="namaPerjanjian" id="" placeholder="Nama Perjanjian">
           <br>
-          <input type="text" class="form-control" name="" id="" placeholder="Tanggal Kontrak">
+          <input type="date" class="form-control" name="tanggalKontrak" id="" placeholder="Tanggal Kontrak">
           <br>
-          <input type="file" accept="application/pdf" class="form-control" name="" id="" placeholder="Lampiran">
+          <input type="file" accept="application/pdf" class="form-control" name="files" id="file" placeholder="Lampiran">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" >Simpan</button>
+        <button type="submit" class="btn btn-primary" >Simpan</button>
       </div>
     </div>
+    </form>
   </div>
 </div>
+
+<?php
+  if(isset($_POST['namaMitra'])){
+    $r = $_FILES['files'];
+    //echo $r;
+    if(AddNewNodin($r,$_POST['namaMitra'],$_POST['namaPerjanjian'],$_POST['tanggalKontrak']))echo "susu";
+
+  }
+?>

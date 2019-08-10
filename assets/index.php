@@ -1,3 +1,12 @@
+<?php 
+    include '../php/DatabaseManager.php'; 
+    include '../assets/view_builder.php';
+
+if(!AllowAcces()){
+    header("location:../assets/login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,14 +53,14 @@
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-
                     <button type="button" id="sidebarCollapse" class="btn">
                         <img src="../assets/img/menu.png" width="30px" alt="">
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-            </nav>
+                    <h2><?php echo CekUser(GetUsername(),GetPassword())->name(); ?></h2>
+                    <form action="" method="post">
+                        <button name="logout" class="btn btn-danger"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+                    </form>
+                </nav>
             
             <?php   
                 $assets=@$_GET['assets'];
@@ -87,7 +96,15 @@
             });
         });
     </script>
-
+<?php
+    if(isset($_POST['logout'])){
+       // header("location:../assets/login.php");
+        logout();
+        unset($_POST['logout']);
+    }
+    
+    
+?>
 
 </body>
 </html>

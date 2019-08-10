@@ -25,7 +25,7 @@ class Upload
     $domain = "http://192.168.64.2/NYIA/";
     $time = GetTimeThis(TypeTime::NAMEFILE);
     if (!file_exists($targetfolder)) {
-      mkdir($targetfolder, 0777, true);
+      mkdir($targetfolder, 777, true);
     }
     $targetfolder = $targetfolder . $time."-".basename( $file['name']) ;
     $file_type = $file['type'];
