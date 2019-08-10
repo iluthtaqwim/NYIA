@@ -1,9 +1,8 @@
     <?php 
       $no = 1;
+
+    $doc = GetDataFiles();
     ?>
-    <div style="text-align: center">
-        <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width: 20%; margin-bottom: 5%" alt="" srcset="">
-    </div>
     <div class="card">
         <div class="card-header" style="text-align: center">
             <h1>Document</h1>

@@ -63,32 +63,49 @@
     }
 
     function tablePerusahaanMitra(){
-      echo '      
-      <div class="menu" style="display:none">
-      <table class="table">
-          <thead>
-              <tr>
-                  <th>NO</th>
-                  <th>Akta</th>
-                  <th>TDP</th>
-                  <th>SIUP</th> 
-                  <th>NPWP</th>
-                  <th>SPPKP</th>
-                  <th>KTP directur</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td scope="row"></td>
-                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></a></td>
-                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                  <td>(tulisane kurang apik wkwk)</td>
-              </tr>
-          </tbody>
-      </table>
-      </div>
+      echo '
+      
+      <div class="modal" id="rincian" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Tambah Mitra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="menu" style="display:none">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>Akta</th>
+                            <th>TDP</th>
+                            <th>SIUP</th> 
+                            <th>NPWP</th>
+                            <th>SPPKP</th>
+                            <th>KTP directur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row"></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></a></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
+                            <td>(tulisane kurang apik wkwk)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      
       ';
     }
 

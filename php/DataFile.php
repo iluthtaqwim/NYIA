@@ -148,14 +148,14 @@ class DataPerusahaan{
       return false;
     }
   }
-  public function IsAdaKurangan(){
+  public function IsAdaKurangan($obj){
     $fungsi = array();
-    $fungsi[] = new ChekData(JENISFILE::AKTAPENDIRIAN);
-    $fungsi[] = new ChekData(JENISFILE::TDP);
-    $fungsi[] = new ChekData(JENISFILE::SIUP);
-    $fungsi[] = new ChekData(JENISFILE::NPWP);
-    $fungsi[] = new ChekData(JENISFILE::SPPKP);
-    $fungsi[] = new ChekData(JENISFILE::KTPDIREKTUR);
+    $fungsi[] = $obj->ChekData(JENISFILE::AKTAPENDIRIAN);
+    $fungsi[] = $obj->ChekData(JENISFILE::TDP);
+    $fungsi[] = $obj->ChekData(JENISFILE::SIUP);
+    $fungsi[] = $obj->ChekData(JENISFILE::NPWP);
+    $fungsi[] = $obj->ChekData(JENISFILE::SPPKP);
+    $fungsi[] = $obj->ChekData(JENISFILE::KTPDIREKTUR);
 
     if (in_array(true, $fungsi)) {
       return true;
@@ -301,9 +301,8 @@ class DataFile{
     $id_create = "VENDOR".$totalrow;
     $sqlw = "INSERT INTO `data_perusahaan`
     (`nama_perusahaan`, `id_key_perusahaan`, `statsus`)
-    VALUES ($nama_perusahaan,$id_create,1)";
+    VALUES ('$nama_perusahaan','$id_create','1')";
     $resulte = $conn->query($sqlw);
-    echo $totalrow ;
     if (!$resulte) {
       return false;
     }else {
@@ -328,16 +327,14 @@ class DataFile{
     }
   }
   public function GetBerkasPerusahaan($conn){
-    $sql = "SELECT * FROM `data_perusahaan` ORDER BY `data`.`no` DESC";
+    $sql = "SELECT * FROM `data_perusahaan` ORDER BY `no` DESC";
     $result = $conn->query($sql);
+    $listdatas = array();
     if (!$result) {
-      return null;
+      return $listdatas;
     }else {
-      $listdatas = array();
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          //Create link gambat
-          // NOTE: elingono
           $link_file = array();
           $keyber = $row['id_key_perusahaan'];
           $sql_linkfile = "SELECT * FROM `data_berkas` WHERE `id_key_perusahaan` = '$keyber'";
@@ -353,7 +350,7 @@ class DataFile{
         }
         return $listdatas;
       }else {
-        return null;
+        return $listdatas;
       }
     }
   }
