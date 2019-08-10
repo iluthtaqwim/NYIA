@@ -1,6 +1,7 @@
 <?php 
     include '../php/DatabaseManager.php'; 
     include '../assets/view_builder.php';
+    include '../helper/helper.php';
 
 if(!AllowAcces()){
     header("location:../assets/login.php");
