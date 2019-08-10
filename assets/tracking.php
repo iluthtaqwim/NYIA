@@ -1,14 +1,15 @@
     <?php
     
     ?>
-    <div class="card">
+    <div class="card mt-5">
         <div class="card-header" style="text-align: center">
             <h1>TRACKING</h1>
+            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">
+                Tambah Data
+              </button>
         </div>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" style="width:10%" data-toggle="modal" data-target="#exampleModal">
-  Add Data
-</button>
+
         <div class="card-content table-responsive">
             <table class="table table-striped" >
                 <thead class="thead-inverse">
@@ -49,8 +50,7 @@
                                 $link_datas = $link->GetLink();
                                 $linkUpload = $link->GetDate();
                             echo"
-                                <a href='$link_datas' id='bottle' ><img src='../assets/img/attach.png' alt='' style='width:20px'>
-                                </a>
+                                <a href='$link_datas' id='bottle' ><button class='btn btn-danger'><i class='fa fa-times' ></i></i></button></a>
                                 <p>$linkUpload</p>";
                                 if($total_message>=$alink){
                                  $ruru = $alink-1;
@@ -74,10 +74,10 @@
                             foreach($link_data as $link){
                                 $link_datass = $link->GetLink();
                                  echo"
-                            <a href='$link_datass' id='bottle' ><img src='../assets/img/attach.png' alt='' style='width:20px'>
-                                </a>
+                                 <a href='$link_datass' id='bottle' ><button class='btn btn-success'><i class='fa fa-check' aria-hidden='true'></i></button></a>
                                 ";
                             }
+                            echo" <button class='btn btn-danger'><i class='fa fa-times'></i></button>";
                             if($con_stat==0){
                             echo"
                                 <p>Setujukah anda?</p>

@@ -9,22 +9,12 @@
     <link rel="stylesheet" href="../dist/css/style.css">
 </head>
 <body>
-    <div class="row">
-            <div class="col-md-4">
-                            
-                </div>
-                <div class="col-md-4 col-xs-12">
-                    <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width:70%" alt="" srcset="">
-                </div>
-                <div class="col-md-4">
-                    
-                </div>
-    </div>
     <div class="row ">
       <div class="col-xs-0 col-md-4"></div>
-      <div class="col-xs-12 col-md-4 mt-5">
-        <div class="card text-center bg-info">
+      <div class="col-xs-12 col-md-4 container" >
+        <div class="card text-center bg-primary">
             <div class="card-body">
+            <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width:100%; padding:5% 5% 10% 5%" alt="" srcset="">
                 <form action="" method="post">
                     <div class="row" style="padding-bottom: 20px">
                         <div class="col-md-3 col-xs-12">

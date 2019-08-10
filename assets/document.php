@@ -1,7 +1,7 @@
   <?php
       $document=GetDataFiles();
    ?>
-    <div class="card">
+    <div class="card mt-5">
         <div class="card-header" style="text-align: center">
             <h1>Document</h1>
         </div>
