@@ -1,5 +1,5 @@
     <?php
-      
+    
     ?>
     <div class="card">
         <div class="card-header" style="text-align: center">
@@ -25,20 +25,81 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        $files = GetDataFiles();
+                        $a=0;
+                        foreach($files as $file){
+                            $a++;
+                            $ket_kont = $file->GetKeteranganDoc();
+                            $namedoc = $file->GetNameDoc();
+                            $takon = $file->GetTanggalKontrak();
+                        echo "
                         <tr>
-                            <td scope="row">TEST</td>
-                            <td>TEST</td>
-                            <td>TEST</td>
-                            <td>TEST</td>
-                            <td>
-                                <button type="button"><img src="../assets/img/attach.png" alt="" style="width:20px"></button>
-                                <p>27-08-2019</p>
-                                <p style="font-size: 12px">INI KETERANGAN</p>
+                            <td scope='row'>$a</td>
+                            <td>$namedoc</td>
+                            <td>$ket_kont</td>
+                            <td>$takon</td>
+                            <td>";
+                            $link_data = $file->GetListData();
+                            $message_data = $file->GetMessage();
+                            $total_message = count($message_data);
+                            $alink = 0;
+                            foreach($link_data as $link){
+                                $alink++;
+                                $link_datas = $link->GetLink();
+                                $linkUpload = $link->GetDate();
+                            echo"
+                                <a href='$link_datas' id='bottle' ><img src='../assets/img/attach.png' alt='' style='width:20px'>
+                                </a>
+                                <p>$linkUpload</p>";
+                                if($total_message>=$alink){
+                                 $ruru = $alink-1;
+                                 $value = $message_data[$ruru]->Value();
+                                 echo"
+                                    <p style='font-size: 12px'>$value</p>";
+                                }
+                            }
+                            $con_stat = $file->GetStatus();
+                            if($con_stat==1){
+                               echo"
+                                <p>Input Baru</p>
+                                ";
+                            }
+                            
+                            
+                            echo "
                             </td>
-                            <td>TEST</td>
-                            <td>TEST</td>
-                            <td>TEST</td>
+                            <td>";
+            
+                            foreach($link_data as $link){
+                                $link_datass = $link->GetLink();
+                                 echo"
+                            <a href='$link_datass' id='bottle' ><img src='../assets/img/attach.png' alt='' style='width:20px'>
+                                </a>
+                                ";
+                            }
+                            if($con_stat==0){
+                            echo"
+                                <p>Setujukah anda?</p>
+                                ";
+                            }else if($con_stat==1){
+                               echo"
+                                <p>Anda Menolak</p>
+                                ";
+                            }else if($con_stat==2){
+                               echo"
+                                <p>Terverivikasi</p>
+                                ";
+                            }
+                                
+                                echo"
+                                </td>
+                            <td>Wait</td>
+                            <td>Wait</td>
                         </tr>
+                        ";
+                        }
+                        ?>
                     </tbody>
             </table>
         </div>
@@ -79,7 +140,7 @@
   if(isset($_POST['namaMitra'])){
     $r = $_FILES['files'];
     //echo $r;
-    if(AddNewNodin($r,$_POST['namaMitra'],$_POST['namaPerjanjian'],$_POST['tanggalKontrak']))echo "susu";
+    if(AddNewNodin($r,$_POST['namaMitra'],$_POST['namaPerjanjian'],$_POST['tanggalKontrak']));
 
   }
 ?>
