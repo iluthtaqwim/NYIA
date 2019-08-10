@@ -24,7 +24,7 @@ if(!AllowAcces()){
 <body>
 <div class="wrapper">
         <!-- Sidebar  -->
-        <nav class=" mt-5" id="sidebar">
+        <nav id="sidebar">
             <div class="sidebar-header">
                 <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width:100%" alt="" srcset="">
             </div>
@@ -93,19 +93,15 @@ if(!AllowAcces()){
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
+<script>
+    $(document).ready(function () {
 
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar, #content').toggleClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-    </script>
+$('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+});
+
+});
+</script>
 <?php
     if(isset($_POST['logout'])){
        // header("location:../assets/login.php");

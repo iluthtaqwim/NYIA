@@ -73,7 +73,7 @@ function Tabul($t,$idpo){
         $namper = $datane->NamaPerusahaan();
         $filePerusahanae = $datane->FilePerusahaan();
         echo '  
-        <div class="card">
+        <div class="card mt-5">
             <div class="card-header" style="text-align: center">';
                  echo"<h1>$namper</h1>";
         echo'
