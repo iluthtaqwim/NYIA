@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 <div class="wrapper">
@@ -19,17 +20,19 @@
 
             <ul class="list-unstyled components">
                 
-                <li class="active">
-                    <a href="?assets=beranda">Beranda</a>
-                    
+                <li class="notClicked">
+                    <a href="?assets=beranda">Beranda</a>           
                 </li>
-                <li>
-                    <a href="#">Mitra Usaha</a>
+                <li class="notClicked">
+                    <a href="?assets=mitra">Mitra Usaha</a>
                 </li>
-                <li>
-                    <a href="?assets=tracking">Tracking</a>
-                </li>
-                <li>
+                <div id="tabs">
+                    <li id="tab" >
+                        <a href="?assets=tracking">Tracking</a>
+                    </li>
+                </div>
+                
+                <li> 
                     <a href="?assets=document">Document</a>
                 </li>
 
@@ -64,6 +67,9 @@
                 if($assets== 'document'){
                     include "../assets/document.php";
                 }
+                if($assets== 'mitra'){
+                    include "../assets/mitra_usaha.php";
+                }
             ?>
     </div>
 
@@ -81,5 +87,7 @@
             });
         });
     </script>
+
+
 </body>
 </html>
