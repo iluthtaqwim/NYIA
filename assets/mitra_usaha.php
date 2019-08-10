@@ -12,13 +12,14 @@ function Tabul($t,$idpo){
     $mitra = GetBerkasPerusahaan();
     if($t){
         echo' 
+
  <div class="card">
             <div class="card-header" style="text-align: center">
                  <h1>MITRA USAHA</h1>
-                 <button type="button" class="btn btn-primary" style="width:20%" data-toggle="modal" data-target="#modalMitra">
-                    Tambah Mitra
-                </button>
             </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMitra">
+                Tambah Mitra
+            </button>
             <div class="card-body">
 <table class="table" style ="margin-bottom: 20px;">
             <thead>
@@ -43,7 +44,7 @@ function Tabul($t,$idpo){
             //     $link .= $_SERVER['HTTP_HOST']; 
               //  $link .= $_SERVER['REQUEST_URI']; 
             $juju = $mitr->IdKeyPerusahaan();
-            $link ="/assets/index.php?assets=mitra&id_perusahaan=".$juju;
+            $link ="../assets/index.php?assets=mitra&id_perusahaan=".$juju;
               echo "
               <tr>
                 <td scope='row'>$aaa</td>
@@ -83,9 +84,9 @@ function Tabul($t,$idpo){
                  echo"<h1>$namper</h1>";
         echo'
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <!-- Table mitra usaha -->
-        <table class="table">
+        <table class="table ">
             <thead>
                 <tr>
                     <th>NO</th>
@@ -100,12 +101,71 @@ function Tabul($t,$idpo){
             <tbody>
                 <tr>
                     <td scope="row">1</td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></a></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img src="../assets/img/attach.png" alt="" style="width:20px"></button></td>
+                    <td>
+                            <button class="btn btn-primary">
+                                <div class="image-upload">
+                                    <label for="file-input">
+                                        <img width="20px" src="../assets/img/attach.png"/>
+                                    </label> 
+                                    <input style="display:none" accept="application/pdf" id="file-input" type="file" />  
+                                </div>
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"  ><i class="fa fa-paper-plane" aria-hidden="true"></i></button>    
+                    </td>
+                    <td>
+                    <button class="btn btn-primary">
+                    <div class="image-upload">
+                        <label for="file-input">
+                            <img width="20px" src="../assets/img/attach.png"/>
+                        </label> 
+                        <input style="display:none" accept="application/pdf" id="file-input" type="file" />  
+                    </div>
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                    <button class="btn btn-primary">
+                    <div class="image-upload">
+                        <label for="file-input">
+                            <img width="20px" src="../assets/img/attach.png"/>
+                        </label> 
+                        <input style="display:none" accept="application/pdf" id="file-input" type="file" />  
+                    </div>
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                    <button class="btn btn-primary">
+                    <div class="image-upload">
+                        <label for="file-input">
+                            <img width="20px" src="../assets/img/attach.png"/>
+                        </label> 
+                        <input style="display:none" accept="application/pdf" id="file-input" type="file" />  
+                    </div>
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                    <button class="btn btn-primary">
+                    <div class="image-upload">
+                        <label for="file-input">
+                            <img width="20px" src="../assets/img/attach.png"/>
+                        </label> 
+                        <input style="display:none" accept="application/pdf" id="file-input" type="file" />  
+                    </div>
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                    <button class="btn btn-primary">
+                    <div class="image-upload">
+                        <label for="file-input">
+                            <img width="20px" src="../assets/img/attach.png"/>
+                        </label> 
+                        <input style="display:none" accept="application/pdf" id="file-input" type="file" />  
+                    </div>
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                 </tr>
             </tbody>
         </table>
