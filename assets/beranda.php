@@ -4,13 +4,12 @@
     
 ?>
 <div>
-    <div style="" class="card mt-5">
-        <div class="card-header" style="text-align: center">
+        <div style="" class="card mt-5">
+        <div class="card-header " style="text-align: center">
             <h1>History</h1>
         </div>
         <div class="card-body table-responsive">
-            
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>NO</th>

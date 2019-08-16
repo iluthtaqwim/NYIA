@@ -29,7 +29,7 @@ class Upload
     }
     $targetfolder = $targetfolder . $time."-".basename( $file['name']) ;
     $file_type = $file['type'];
-    //if ($file_type=="application/pdf") {
+    if ($file_type=="application/pdf") {
     if(move_uploaded_file($file['tmp_name'], $targetfolder))
       {
       $nganu = new DataUpload($targetfolder,1);
@@ -40,10 +40,10 @@ class Upload
       $nganu = new DataUpload($targetfolder,0);
       return $nganu;
       }
-    // }
-    // else {
-    //   return "Format Berbeda";
-    // }
+    }
+    else {
+      return "Format Berbeda";
+    }
   }
 }
 

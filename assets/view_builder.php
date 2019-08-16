@@ -29,7 +29,44 @@
         <td scope='row'>$no</td>
         <td>$hist->username</td>
         <td>$hist->date</td>
-        <td>$hist->ket</td>
+        ";
+        $keter = $hist->ket();
+    switch ($keter) {
+    case Keterangan::MENCOBA_MASUK:
+      echo '<td>Mencoba Masuk Portal</td>';
+      break;
+      case Keterangan::MASUK_PORTAL:
+        // code...
+        echo '<td>Masuk Portal</td>';
+        break;
+        case Keterangan::MEMASUKAN_NODIN_BARU:
+          // code...
+          echo '<td>Memasukan Nota Dinas Baru</td>';
+          break;
+          case Keterangan::MENOLAK_NODIN:
+            // code...
+            echo '<td>Menolak Nota Dinas</td>';
+            break;
+            case Keterangan::MEREVISI_NODIN:
+              // code...
+              echo '<td>Merevisi Nota Dinas</td>';
+              break;
+              case Keterangan::MENANDATANGANI_NODIN:
+                // code...
+                echo '<td>Menandatangani Nota Dinas</td>';
+                break;
+                case Keterangan::LOGOUT:
+                  // code...
+                  echo '<td>keluar Portal</td>';
+                  break;
+    
+    default:
+      // code...
+      echo '<td>Null</td>';
+      break;
+  }
+        
+        echo"
         <td>$hist->ip</td>
       </tr>
       ";
@@ -47,12 +84,12 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form action="" method="post">  
+                <form action="doing.php" method="post">  
                   <input type="text" style="width: 100%" name="namaPerusahaan" id="" placeholder="Nama Perusahaan">
               </div>
               <div class="modal-footer">
                 
-                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  <button type="submit" value="" id="butonSubmiter" class="btn btn-primary">Simpan</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
@@ -110,9 +147,11 @@
     }
 
     function modalAlasan(){
+    
+        echo"<div class='modal fade' id='alasan' tabindex='-1'>";
       echo '
       <!-- Modal -->
-      <div class="modal fade" id="alasan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -121,9 +160,9 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-              <form action="" method="post">
+              <form action="doing.php" method="post">
                 <div class="modal-body">
-                  <textarea name="" id="" cols="55" rows="10" placeholder="Ketik disini"></textarea>
+                  <textarea name="alasantolak" id="" cols="55" rows="10" placeholder="Ketik disini"></textarea>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

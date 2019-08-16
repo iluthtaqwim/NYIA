@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../dist/css/bootstrap.css ">
+</head>
+<body>
+    <div style="text-align:center">
+        <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="height: auto; width: 40%; margin-bottom: 5%" alt="" srcset="">
+    </div>
+    <div class="card container">
+        <h1 style="text-align: center;" class="card-header">KATEGORI LOGIN USER</h1>
+        <div style="size: 50px">
+            <button class="btn btn-primary" type="submit">Add User</button>
+        </div>
+        <div class="card-content">
+            <table class="table table-bordered ">
+                <thead class="thead-inverse bg-secondary">
+                    <tr>
+                        <th>Sales</th>
+                        <th>Legal</th>
+                        <th>GM</th>
+                        <th>Mitra</th>
+                    </tr>
+                    </thead>
+                    <tbody style="background-color: aqua">
+                        <tr>
+                            <td scope="row">Data User</td>
+                            <td>sdfsf</td>
+                            <td>sdfsf</td>
+                            <td>hghjg</td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+<script src="../dist/js/bootstrap.js"></script>
+<script src="../js/src/popover.js"></script>
+</html>

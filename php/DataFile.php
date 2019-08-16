@@ -1,9 +1,13 @@
 <?php
 class DataLink{
-  public function __construct($no,$link,$date){
+  public function __construct($no,$link,$date,$validate,$status,$id,$rawe){
     $this->no =$no;
     $this->link = $link;
     $this->date = $date;
+    $this->validate = $validate;
+    $this->status = $status;
+    $this->id = $id;
+    $this->raw = $rawe;
   }
   public function GetNo(){
     return $this->no;
@@ -13,6 +17,19 @@ class DataLink{
   }
   public function GetDate(){
     return $this->date;
+  }
+  public function GetValidate(){
+      if($this->status>=1){
+          return $this->validate;
+      }else{
+          return null;
+      }
+  }
+  public function GetStatus(){
+      return $this->status;
+  }
+  public function GetDateNow(){
+      return $this->validate;
   }
 }
 class DataMessage{
@@ -44,26 +61,34 @@ class DataMessage{
   }
 }
 class DataManager{
-  public function __construct($no,$date,$namedoc,$ketdoc,$tglcontrak,$linkconfrm,$status,$listData,$listMessage){
+  public function __construct($no,$date,$namedoc,$ketdoc,$tglcontrak,$linkconfrm,$status,$listData,$listMessage,$keyber,$date_confrm){
         $this->no = $no;
         $this->date = $date;
-        $this->namedoc = $namedoc;
         $this->ketdok = $ketdoc;
         $this->tgl_contract = $tglcontrak;
         $this->linkconfrm = $linkconfrm;
         $this->status = $status;
         $this->listData = $listData;
+        $this->namedoc = $namedoc;
         $this->listMessage = $listMessage;
+        $this->keyber = $keyber;
+        $this->dateconfirm = $date_confrm;
   }
+  public function GetDateConfirm(){
+    return $this->dateconfirm;
+  }
+  public function GetKeyBerkas(){
+    return $this->keyber;
+  }
+  public function GetNameDoc(){
+    return $this->namedoc;
+  }
+  
   public function GetNo(){
     return $this->no;
   }
   public function GetDate(){
     return $this->date;
-  }
-
-  public function GetNameDoc(){
-    return $this->namedoc;
   }
   public function GetKeteranganDoc(){
     return $this->ketdok;
@@ -89,7 +114,6 @@ class FilePerushaan{
   public function __construct($no,$date,$id_key_berkas,$id_key_jenis,$link_berkas,$status,$expired){
     $this->no =$no;
     $this->date = $date;
-    $this->id_key_perusahaan =$id_key_perusahaan;
     $this->id_key_berkas =$id_key_berkas;
     $this->id_key_jenis =$id_key_jenis;
     $this->link_berkas =$link_berkas;
@@ -121,7 +145,7 @@ class FilePerushaan{
     return $this->expired;
   }
   public function isExpired(){
-    $date = GetTime(TypeTime::DATE);
+    $date = date(TypeTime::DATE);//GetTime(TypeTime::DATE);
     $expir = $this->expired;
     if($date>$expir){
       return true;
@@ -191,10 +215,10 @@ class DataFile{
   public function GetDataFiles($conn){
     $sql = "SELECT * FROM `data` ORDER BY `data`.`no` DESC";
     $result = $conn->query($sql);
+    $listdatas = array();
     if (!$result) {
-      return null;
+      return $listdatas;
     }else {
-      $listdatas = array();
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           //Create link gambat
@@ -205,7 +229,7 @@ class DataFile{
           $result_file = $conn->query($sql_linkfile);
             if ($result_file->num_rows > 0) {
               while($row_file = $result_file->fetch_assoc()) {
-                $link_file[] = new DataLink($row_file['no'],$row_file['link'],$row_file['date']);
+                $link_file[] = new DataLink($row_file['no'],$row_file['link'],$row_file['date'],$row_file['validate'],$row_file['status'],$row_file['id'],$row_file['raw']);
               }
             }
           //Create link message
@@ -219,11 +243,50 @@ class DataFile{
               }
             }
 
-          $listdatas[] = new DataManager($row['no'],$row['date'],$row['name_doc'],$row['ket_doc'],$row['tgl_contract'],$row['link_con'],$row['status'],$link_file,$link_message);
+          $listdatas[] = new DataManager($row['no'],$row['date'],$row['name_doc'],$row['ket_doc'],$row['tgl_contract'],$row['link_con'],$row['status'],$link_file,$link_message,$keyber,$row['date_confrm']);
         }
         return $listdatas;
       }else {
-        return null;
+        return $listdatas;
+      }
+    }
+  }
+  public function GetDataFilesSales($conn,$uploadby){
+    $sql = "SELECT * FROM `data` WHERE `upload_by`='$uploadby' ORDER BY `data`.`no` DESC";
+    $result = $conn->query($sql);
+    $listdatas = array();
+    if (!$result) {
+      return $listdatas;
+    }else {
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+          //Create link gambat
+          // NOTE: elingono
+          $link_file = array();
+          $keyber = $row['link_id'];
+          $sql_linkfile = "SELECT * FROM `data_link` WHERE `link_id` = '$keyber'";
+          $result_file = $conn->query($sql_linkfile);
+            if ($result_file->num_rows > 0) {
+              while($row_file = $result_file->fetch_assoc()) {
+                $link_file[] = new DataLink($row_file['no'],$row_file['link'],$row_file['date'],$row_file['validate'],$row_file['status'],$row_file['id'],$row_file['raw']);
+              }
+            }
+          //Create link message
+          // NOTE: elingono
+          $link_message = array();
+          $sql_message = "SELECT * FROM `message` WHERE `id_data` = '$keyber'";
+          $result_message = $conn->query($sql_message);
+            if ($result_message->num_rows > 0) {
+              while($row_mess = $result_message->fetch_assoc()) {
+                $link_message[]  = new DataMessage($row_mess['no'],$row_mess['tgl'],$row_mess['upload_by'],$row_mess['send_to'],$row_mess['value'],$row_mess['id_message']);
+              }
+            }
+
+          $listdatas[] = new DataManager($row['no'],$row['date'],$row['name_doc'],$row['ket_doc'],$row['tgl_contract'],$row['link_con'],$row['status'],$link_file,$link_message,$keyber,$row['date_confrm']);
+        }
+        return $listdatas;
+      }else {
+        return $listdatas;
       }
     }
   }
@@ -241,7 +304,7 @@ class DataFile{
     }
 
   }
-  public function AddNodin($conn,User $user,$namedoc,$ketdoc,$tglcat,$link){
+  public function AddNodin($conn,User $user,$namedoc,$ketdoc,$tglcat,$link,$nameraw){
     $status_doc = 0;
     $send_to = "Legal";
     $link_confirm = "notset";
@@ -250,15 +313,16 @@ class DataFile{
     $finfo = mysqli_fetch_assoc($fid_result);
     $totalrow = $finfo['COUNT(*)'];
     $link_id_create = "key%500%".$user->username()."%500%".$totalrow;
+    $jiji = $user->keyuser;
     $sql = "INSERT INTO
     `data`(`link_id`, `upload_by`, `send_to`, `name_doc`, `ket_doc`, `tgl_contract`, `link_con`, `status`)
-    VALUES ('$link_id_create', '$user->keyuser', '$send_to', '$namedoc', '$ketdoc',STR_TO_DATE($tglcat, '%Y%m%d') , '$link_confirm', $status_doc)";
+    VALUES ('$link_id_create', '$jiji', '$send_to', '$namedoc', '$ketdoc',STR_TO_DATE($tglcat, '%Y%m%d') , '$link_confirm', '$status_doc')";
     $result = $conn->query($sql);
     if (!$result) {
       return false;
     }else {
       $inlink = $link->GetLink();
-      $sql_newLink = "INSERT INTO `data_link`(`link_id`, `link`) VALUES ('$link_id_create','$inlink')";
+      $sql_newLink = "INSERT INTO `data_link`(`link_id`, `link`, `raw`) VALUES ('$link_id_create','$inlink','$nameraw')";
       $resulte = $conn->query($sql_newLink);
       if (!$resulte) {
         return false;
@@ -267,11 +331,11 @@ class DataFile{
       }
     }
   }
-  public function LampiranBaru($conn,$idok,$link){
+  public function LampiranBaru($conn,$idok,$link,$raw){
     $inlink = $link->GetLink();
-    $sql = "UPDATE `data` SET `status`=0 WHERE `link_id` = '$idok'";
+    $sql = "UPDATE `data` SET `status`=0 WHERE `link_id` = '$idok' ";
     $resultex = $conn->query($sql);
-    $sql_newLink = "INSERT INTO `data_link`(`link_id`, `link`) VALUES ('$idok','$inlink')";
+    $sql_newLink = "INSERT INTO `data_link`(`link_id`, `link`, `raw`) VALUES ('$idok','$inlink','$raw')";
     $resulte = $conn->query($sql_newLink);
     if (!$resulte) {
       return false;
@@ -279,17 +343,58 @@ class DataFile{
       return true;
     }
   }
-  public function DataDiterima($conn,$idok){
+  public function LampiranBaruNodin($conn,$idok,$link,$node,$raw){
+    $inlink = $link->GetLink();
+    $sql_newLink = "INSERT INTO `data_link`(`link_id`, `link`, `id`,`raw`) VALUES ('$idok','$inlink','$node','$raw')";
+    $resulte = $conn->query($sql_newLink);
+    if (!$resulte) {
+      return false;
+    }else {
+      return true;
+    }
+  }
+  public function LampiranBaruFix($conn,$idok,$link){
+    $inlink = $link->GetLink();
+    $nowtime = GetTimeThis(TypeTime::DATEDB);
+    $sql = "UPDATE `data` SET `status`=3,`link_con`='$inlink',`date_confrm`='$nowtime' WHERE `link_id` = '$idok'";
+    $resultex = $conn->query($sql);
+    if (!$resultex) {
+      return false;
+    }else {
+      return true;
+    }
+  }
+  public function DataDiterima($conn,$idok,$no){
+    $verivTang = GetTimeThis(TypeTime::DATEDB);
+    $sql_po = "UPDATE `data_link` SET `validate`=$verivTang,`status`=1 WHERE `link_id`='$idok' AND `no`='$no'";
+    $result = $conn->query($sql_po);
+    if($result){
     $sql = "UPDATE `data` SET `status`=2 WHERE `link_id` = '$idok'";
-    $resulte = $conn->query($sql_newLink);
-    if (!$resulte) {
-      return false;
-    }else {
-      return true;
+    $resulte = $conn->query($sql);
+        if (!$resulte) {
+          return false;
+        }else {
+          return true;
+        }
+    }else{
+        return false;
     }
   }
-  public function DataDitolak($conn,$user,$idok,$alasan){
+  public function DataDiterimax($conn,$idok,$no,$kui){
+    $verivTang = GetTimeThis(TypeTime::DATEDB);
+    $sql = "UPDATE `data` SET `status`='$kui' WHERE `link_id` = '$idok'";
+    $resulte = $conn->query($sql);
+        if (!$resulte) {
+          return false;
+        }else {
+          return true;
+        }
+  }
+  public function DataDitolak($conn,$user,$idok,$alasan,$no){
     $this->SendMessage($conn,$user,$alasan,$idok);
+    $verivTang = GetTimeThis(TypeTime::DATEDB);
+    $sql_po = "UPDATE `data_link` SET `validate`=$verivTang,`status`=1 WHERE `link_id`='$idok' AND `no`='$no'";
+    $result = $conn->query($sql_po);
     $sql = "UPDATE `data` SET `status`=1 WHERE `link_id` = '$idok'";
     $resulte = $conn->query($sql);
     if (!$resulte) {
@@ -314,18 +419,19 @@ class DataFile{
       return true;
     }
   }
-  public function AddBerkasPerusahaan($conn,$id_key_perusahaan,JENISFILE $id_key_jenis,$link,$expired){
-    $sql_counting = "SELECT COUNT(*) FROM data_berkas";
+  public function AddBerkasPerusahaan($conn,$id_key_perusahaan,$id_key_jenis,$link,$expired){
+    $sql_counting = "SELECT * FROM `data_berkas` WHERE `id_key_perusahaan` = '$id_key_perusahaan'";
     $fid_result = $conn->query($sql_counting);
     $finfo = mysqli_fetch_assoc($fid_result);
     $totalrow = $finfo['COUNT(*)'];
     $id_create = "BERKAS".$totalrow;
     $sql = "INSERT INTO `data_berkas`
     (`id_key_perusahaan`, `id_key_berkas`, `id_key_jenis`, `link_berkas`, `status`, `expired`)
-    VALUES ('$id_key_perusahaan','$id_create','$id_key_jenis','$link',1,STR_TO_DATE($expired, '%Y%m%d'))";
+    VALUES ('$id_key_perusahaan','$id_create','$id_key_jenis','$link','1','$expired')";
 
     $resulte = $conn->query($sql);
     if (!$resulte) {
+        echo $resulte;
       return false;
     }else {
       return true;

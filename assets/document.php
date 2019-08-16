@@ -1,9 +1,14 @@
   <?php
-      $document=GetDataFiles();
+  $userData = CekUser(GetUsername(),GetPassword());
+      if($userData->kat()==1){
+                        $document = GetDataFiles();
+            }else{
+                            $document = GetDataFilesSales($userData->keyuser());
+                        }
 
    ?>
     <div class="card mt-5">
-        <div class="card-header" style="text-align: center">
+        <div class="card-header table-striped" style="text-align: center">
             <h1>Document</h1>
         </div>
         <form action="" method="POST" >
@@ -32,7 +37,7 @@
                     <tr>
                         <th>No</th>
                         <th>Tanggal</th>
-                        <th>Document</th>
+                        <th>Nama Mitra</th>
                         <th>Nama Kontrak</th>
                         <th>Status</th>
                     </tr>
@@ -88,14 +93,10 @@
                               <td><?php echo $hise->ketdok ?></td>
                               <td>
                                 <?php
-                                if($hise->status==0) {
-                                  echo '<b style="color:orange">Diajukan</b>';
-                                }elseif ($hise->status==1) {
-                                  echo '<b style="color:teal">Diproses</b>';
-                                }elseif ($hise->status==2) {
-                                  echo '<b style="color:red">Ditolak</b>';
-                                }elseif ($hise->status==3) {
-                                  echo '<b style="color:green">Diterima</b>';
+                                if($hise->status>=5) {
+                                  echo '<b style="color:orange">Selesai</b>';
+                                }else {
+                                  echo '<b style="color:red">Belum Beres</b>';
                                 }
                                  ?>
                               </td>

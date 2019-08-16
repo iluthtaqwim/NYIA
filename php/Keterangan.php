@@ -24,6 +24,8 @@ class Keterangan extends Enum{
     const MENERIMA_NODIN = 5;
     const MEREVISI_NODIN = 6;
     const MENANDATANGANI_NODIN = 7;
+    const LOGOUT = 8;
+    const MENAMBAH_DATA_PERUSAHAAN = 9;
 }
 class JENISFILE extends Enum{
   const AKTAPENDIRIAN = 1;
@@ -32,5 +34,6 @@ class JENISFILE extends Enum{
   const NPWP = 4;
   const SPPKP = 5;
   const KTPDIREKTUR = 6;
+  const SuratDomisili = 7;
 }
 ?>

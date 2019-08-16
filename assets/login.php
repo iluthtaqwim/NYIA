@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Angkasa Pura Tracking App</title>
+    <meta name="keywords" content="angkasa, pura, angkasa pura 1, angkasa pura I, angkasapura, bandara, world class, airport, airline, karir, career, juanda, surabaya, sultan hasanuddin, makassar, sams sepinggan, balikpapan, frans kaisiepo, biak, adisutjipto, yogyakarta, lombok, bandara international, sam ratulangi, manado, syamsudin noor, banjarmasin, ahmad yani, semarang, el tari, kupang, pattimura, ambon, adi soemarmo, surakarta, solo ">
+
+	<meta name="author" content="PT Angkasa Pura I (Persero)">
+	<meta name="description" content="StartApp Tracking website for Angkasa Pura Airport">
+	<link rel="shortcut icon" type="images/x-icon" href="https://ap1.co.id/frontend/images/material/favicon.ico">
+	<meta name="copyright" content="Pengembang Sebelah">
+	<meta name=’robots’ content=’index,follow’>
+	
+	<meta name="og:title" content="Angkasa Pura Tracking App"/>
+<meta name="og:type" content="startapp"/>
+<meta name="og:url" content="http://eka.pengembangsebelah.com/"/>
+<meta name="og:image" content="http://eka.pengembangsebelah.com/assets/img/Angkasa_Pura_logo_2011.svg.png"/>
+<meta name="og:site_name" content="Angkasa Pura"/>
+<meta name="og:description" content="StartApp Tracking website for Angkasa Pura Airport.."/>
+	<meta itemprop="rating" content="4.5" /> 
+	
     <link rel="stylesheet" href="../dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../dist/css/style.css">
 </head>
@@ -15,7 +31,7 @@
         <div class="card text-center" style="background-color:skyblue">
             <div class="card-body">
             <img src="../assets/img/Angkasa_Pura_logo_2011.svg.png" style="width:100%; padding:5% 5% 10% 5%" alt="" srcset="">
-                <form action="" method="post">
+                <form action="doing.php" method="post">
                     <div class="row" style="padding-bottom: 20px">
 
                         <div class="col-md-12 col-xs-12">
@@ -54,11 +70,6 @@
 
 <?php 
     include '../php/DatabaseManager.php';
-
-    if(isset($_POST['username'])&& isset($_POST['password'])){
-        CekUser($_POST['username'],$_POST['password']);
-
-    }
 
     if(AllowAcces()){
         header("location:../assets/index.php");

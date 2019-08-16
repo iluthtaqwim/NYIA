@@ -73,10 +73,12 @@ class HistoryManager{
   }
 
   public function GetHistory($conn,$keyuser){
-    $sql = "SELECT * FROM history WHERE keyuser = '$keyuser'";
+    $sql = "SELECT * FROM history WHERE keyuser = '$keyuser' ORDER BY `no` DESC";
     $result = $conn->query($sql);
+    $listhistory = array();
     if (!$result) {
       trigger_error('Invalid query: ' . $conn->error);
+      return $listhistory;
     }
     $listhistory = array();
     if ($result->num_rows > 0) {

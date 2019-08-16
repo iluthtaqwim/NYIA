@@ -24,7 +24,8 @@ function ErrorReport(){
   return;
 }
 function AllowAcces(){
-  return isset($_SESSION["username"]) && isset($_SESSION["password"]);
+    if(!isset($_SESSION["username"])) return false;
+    else return isset($_SESSION["username"]) && isset($_SESSION["password"]);
 }
 
 //cara pake AddHistory(username,password,keterangan,keyuser);
@@ -49,8 +50,8 @@ function GetHistory(){
     return $historydata;
   }else {
     TutupKoneksi($conn);
+    return $historydata;
     unset($historydata);
-    return null;
   }
 
 }
@@ -69,8 +70,10 @@ function CekUser($username,$pass){
   }else {
     TutupKoneksi($conn);
     unset($du);
-    $_SESSION["username"] = $user->username();
-    $_SESSION["password"] = $user->password();
+    if(!isset($_SESSION["username"])&&!isset($_SESSION["password"])){
+        $_SESSION["username"] = $user->username();
+        $_SESSION["password"] = $user->password();
+    }
     return $user;
   }
 }
@@ -81,6 +84,7 @@ function CekUser($username,$pass){
 // }
 function AddNewNodin($file,$namedoc,$ketdoc,$tgl){
   //$conn,$namamitra,$namakontrak,$tglkontrak,
+  $tgl = str_replace('-', '',$tgl);
   $upload = new Upload;
   $targetfolder = "../uploaddata/notadinas/";
   $link = $upload->Data($file,$targetfolder);
@@ -89,8 +93,9 @@ function AddNewNodin($file,$namedoc,$ketdoc,$tgl){
     $userdata = CekUser(GetUsername(),GetPassword());
     $dafil = new DataFile;
     $conn = BuatKoneksi();
+    $nafil = $file['name'];
     //$tgl = GetTimeThis(TypeTime::DATEDB);
-    $dafil->AddNodin($conn,$userdata,$namedoc,$ketdoc,$tgl,$link);
+    $dafil->AddNodin($conn,$userdata,$namedoc,$ketdoc,$tgl,$link,$nafil);
     if($dafil){
       TutupKoneksi($conn);
       unset($dafil);
@@ -113,7 +118,51 @@ function NewLampiran($file,$link_id_doc){
     $dafil = new DataFile;
     $conn = BuatKoneksi();
     //$tgl = GetTimeThis(TypeTime::DATEDB);
-    $dafil->LampiranBaru($conn,$link_id_doc,$link);
+    $dafil->LampiranBaru($conn,$link_id_doc,$link,$file['name']);
+    if($dafil){
+      TutupKoneksi($conn);
+      unset($dafil);
+      return true;
+    }else {
+      TutupKoneksi($conn);
+      unset($dafil);
+      return false;
+    }
+  }else {
+    return false;
+  }
+}
+function NewLampiranNodin($file,$link_id_doc,$node){
+  $upload = new Upload;
+  $targetfolder = "../uploaddata/notadinas/";
+  $link = $upload->Data($file,$targetfolder);
+  if($link->GetStats()!=0){
+    if(!AllowAcces())ErrorReport();
+    $dafil = new DataFile;
+    $conn = BuatKoneksi();
+    //$tgl = GetTimeThis(TypeTime::DATEDB);
+    $dafil->LampiranBaruNodin($conn,$link_id_doc,$link,$node,$file['name']);
+    if($dafil){
+      TutupKoneksi($conn);
+      unset($dafil);
+      return true;
+    }else {
+      TutupKoneksi($conn);
+      unset($dafil);
+      return false;
+    }
+  }
+}
+function FixLampiran($file,$link_id_doc){
+  $upload = new Upload;
+  $targetfolder = "../uploaddata/notadinasFix/";
+  $link = $upload->Data($file,$targetfolder);
+  if($link->GetStats()!=0){
+    if(!AllowAcces())ErrorReport();
+    $dafil = new DataFile;
+    $conn = BuatKoneksi();
+    //$tgl = GetTimeThis(TypeTime::DATEDB);
+    $dafil->LampiranBaruFix($conn,$link_id_doc,$link,$file['name']);
     if($dafil){
       TutupKoneksi($conn);
       unset($dafil);
@@ -142,21 +191,42 @@ function GetDataFiles(){
   TutupKoneksi($conn);
   return $datne;
 }
-function DataDitolak($value,$idok){
+function GetDataFilesSales($uploadby){
+  $conn = BuatKoneksi();
+  $dafil = new DataFile;
+  $datne =  $dafil->GetDataFilesSales($conn,$uploadby);
+  TutupKoneksi($conn);
+  return $datne;
+}
+function DataDitolak($value,$idok,$no,$filr){
+  NewLampiranNodin($filr,$idok,1);
   $conn = BuatKoneksi();
   $dafil = new DataFile;
   if(!AllowAcces())ErrorReport();
   $userLo = CekUser(GetUsername(),GetPassword());
-  $datne =  $dafil->DataDitolak($conn,$userLo,$idok,$value);
+  $datne =  $dafil->DataDitolak($conn,$userLo,$idok,$value,$no);
   TutupKoneksi($conn);
   unset($dafil);
 }
-function DataDiterima($idok){
+function DataDiterima($idok,$no,$file){
+    NewLampiranNodin($file,$idok,2);
   $conn = BuatKoneksi();
   $dafil = new DataFile;
-  $datne =  $dafil->DataDiterima($conn,$idok);
+  $datne =  $dafil->DataDiterima($conn,$idok,$no);
   TutupKoneksi($conn);
   unset($dafil);
+  return $datne;
+}
+function DataDiterimax($idok,$no,$nox){
+  $conn = BuatKoneksi();
+  $dafil = new DataFile;
+  $datne =  $dafil->DataDiterimax($conn,$idok,$no,$nox);
+  TutupKoneksi($conn);
+  unset($dafil);
+  return $datne;
+}
+function DataDiterimaS($idok,$no,$file,$s){
+    NewLampiranNodin($file,$idok,$s);
 }
 function TambahDataPerusahaan($namaPerusahaan){
   $conn = BuatKoneksi();
@@ -165,16 +235,19 @@ function TambahDataPerusahaan($namaPerusahaan){
   TutupKoneksi($conn);
   return $dafil;
 }
-function TambahBerkasPerusahaan($id_key_perusahaan,JENISFILE $id_key_jenis,$file,$expired){
+function TambahBerkasPerusahaan($id_key_perusahaan,$id_key_jenis,$file,$expired){
+    echo "hai";
+    $tgl = str_replace('-', '',$expired);
   $upload = new Upload;
-  $targetfolder = "../uploaddata/berkasperusahaan/".$id_key_perusahaan."/";
+  $targetfolder = "../uploaddata/berkasperusahaan/";
   $link = $upload->Data($file,$targetfolder);
+  $ll = $link->GetLink();
   if($link->GetStats()!=0){
     if(!AllowAcces())ErrorReport();
     $dafil = new DataFile;
     $conn = BuatKoneksi();
     //$tgl = GetTimeThis(TypeTime::DATEDB);
-    $datne =  $dafil->AddBerkasPerusahaan($conn,$id_key_perusahaan,$id_key_jenis,$link,$expired);
+    $datne =  $dafil->AddBerkasPerusahaan($conn,$id_key_perusahaan,$id_key_jenis,$ll,$expired);
     if($dafil){
       TutupKoneksi($conn);
       unset($dafil);
@@ -195,11 +268,5 @@ function GetBerkasPerusahaan(){
   TutupKoneksi($conn);
   return $datne;
 }
-
-$os = array(false, false, false, false);
-if (in_array(true, $os)) {
-    echo "Got Irix";
-}
-
 
 ?>
