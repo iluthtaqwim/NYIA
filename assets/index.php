@@ -43,8 +43,12 @@ if(!AllowAcces()){
 
 </head>
 <body>
-<nav class="navbar navbar-light fixed-top navbar-expand-lg" style="background-color: #009BE0;opacity: 0.9;">
-  <a style="background-image: url(../assets/img/bg_logo.png);top: 0%" class="navbar-brand" href="../assets/index.php"><img width="70%" src="https://ap1.co.id/contents/logo/large/ori-logo-ap-corp.png" alt="" srcset=""></a>
+<nav class="navbar navbar-dark fixed-top navbar-expand-lg" style="background-color: #009BE0;opacity: 0.9;">
+    <div style="height: auto; width: 531px">
+            <div style="background-image: url(../assets/img/bg_logo.png)">
+                <a class="navbar-brand" href="../assets/index.php"><img width="70%" src="https://ap1.co.id/contents/logo/large/ori-logo-ap-corp.png" alt="" srcset=""></a>
+            </div>
+        </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -68,11 +72,15 @@ if(!AllowAcces()){
         </div>
       </li>
     </ul>
+  </div>
+  <ul class="navbar-nav" style="margin-right: 20px;">
+        <li class="nav-item"><a class="nav-link" href="#">DEFAULT</a></li>
+        <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">MATERIAL</a></li>
+    </ul>
     <form class="form-inline ml-auto" action="doing.php" method="post">
         <button name="logout" class="btn btn-danger"><i class="fa fa-power-off" aria-hidden="true"></i></button>
     </form>
-
-  </div>
 </nav>
 
 <div class="carousel slide" data-ride="carousel">
