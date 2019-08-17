@@ -59,8 +59,10 @@ function Tabul($t,$idpo){
                             <td scope='row'>$aaa</td>
                             <td>
                                 <div class='rincian dropdown dropright' >
-                                <i class='fa fa-bell-o' aria-hidden='true'></i>
-                                <a class='dropbtn' href='$link'>$namper</a>
+                                    <span class='d-inline-block' tabindex='0' data-toggle='tooltip' title='Ini tempat tanggal nya'>
+                                        <i class='fa fa-bell-o' aria-hidden='true'></i>
+                                    </span>
+                                        <a class='dropbtn' href='$link'>$namper</a>
                                     <div class='dropdown-content'>
                                         <a href='?assets=document'>Document</a>
                                         <a href='?assets=tracking'>Tracking</a>
@@ -82,9 +84,9 @@ function Tabul($t,$idpo){
                             <td>";
                             
                             if($nampert){
-                                echo " <button class='btn btn-success' disabled><i class='fa fa-check' aria-hidden='true'></i></button>";
+                                echo " <b style='color:green'>Lengkap</b>";
                             }else {
-                                echo "<button class='btn btn-danger' disabled ><i class='fa fa-times' aria-hidden='true'></i></button>";
+                                echo "<b style='color: red'>Tidak Lengkap</b>";
                             }
                     echo "
                             </td>
