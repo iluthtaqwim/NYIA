@@ -119,14 +119,7 @@ ul ul a {
     min-height: 100vh;
     transition: all 0.3s;
 }
-.navbar-brand {
-    padding: 0px; /* firefox bug fix */
-  }
-  .navbar-brand>img {
-    height: 100%;
-    padding: 15px; /* firefox bug fix */
-    width: auto;
-  }
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -145,8 +138,6 @@ ul ul a {
     .carousel-caption{
         padding-top: 5%
     }
-
-    nav
  }
 
  @media (min-width: 576px) { 

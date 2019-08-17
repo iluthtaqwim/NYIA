@@ -61,9 +61,10 @@ class DataMessage{
   }
 }
 class DataManager{
-  public function __construct($no,$date,$namedoc,$ketdoc,$tglcontrak,$linkconfrm,$status,$listData,$listMessage,$keyber,$date_confrm){
+  public function __construct($no,$date,$namedoc,$ketdoc,$tglcontrak,$linkconfrm,$status,$listData,$listMessage,$keyber,$date_confrm,$jenis){
         $this->no = $no;
         $this->date = $date;
+        $this->jenis = $jenis;
         $this->ketdok = $ketdoc;
         $this->tgl_contract = $tglcontrak;
         $this->linkconfrm = $linkconfrm;
@@ -83,7 +84,11 @@ class DataManager{
   public function GetNameDoc(){
     return $this->namedoc;
   }
-  
+
+  public function Jenis(){
+    return $this->jenis;
+  }
+
   public function GetNo(){
     return $this->no;
   }
@@ -155,13 +160,14 @@ class FilePerushaan{
   }
 }
 class DataPerusahaan{
-  public function __construct($no,$nama_perusahaan,$id_key_perusahaan,$status,$fileperushaan,$date){
+  public function __construct($no,$nama_perusahaan,$id_key_perusahaan,$status,$fileperushaan,$date,$jenis){
     $this->no =$no;
     $this->nama_perusahaan =$nama_perusahaan;
     $this->id_key_perusahaan =$id_key_perusahaan;
     $this->status =$status;
     $this->fileperushaan =$fileperushaan;
     $this->date =$date;
+    $this->jenis =$jenis;
   }
   public function ChekData(JENISFILE $jenisfile){
     $kan = $this->fileperushaan;
@@ -197,6 +203,10 @@ class DataPerusahaan{
   }
   public function NamaPerusahaan(){
     return $this->nama_perusahaan;
+  }
+
+  public function Jenis(){
+    return $this->jenis;
   }
   public function IdKeyPerusahaan(){
     return $this->id_key_perusahaan;
@@ -457,7 +467,7 @@ class DataFile{
               }
             }
             //$no,$nama_perusahaan,$id_key_perusahaan,$status,$fileperushaan
-          $listdatas[] = new DataPerusahaan($row['no'],$row['nama_perusahaan'],$row['id_key_perusahaan'],$row['statsus'],$link_file,$row['date']);
+          $listdatas[] = new DataPerusahaan($row['no'],$row['nama_perusahaan'],$row['id_key_perusahaan'],$row['statsus'],$link_file,$row['date'],$row['jenis']);
         }
         return $listdatas;
       }else {

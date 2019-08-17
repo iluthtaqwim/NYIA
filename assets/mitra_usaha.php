@@ -1,10 +1,106 @@
 <?php
     modalAddMitra();
-                       
+
 function Tabul($t,$idpo){
     $mitra = GetBerkasPerusahaan();
-    if($t){
-        echo' 
+    if (isset($_GET['jenis'])) {
+      echo'
+
+      <div class="card mt-5">
+          <div class="card-header" style="text-align: center">
+              <h1>MITRA USAHA</h1>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMitra">
+                      Tambah Mitra
+              </button>
+          </div>
+
+          <div class="card-body table-responsive">
+              <table class="table table-striped" style ="margin-bottom: 20px;">
+                  <thead>
+                      <tr>
+                          <th>NO</th>
+                          <th>Nama Perusahaan</th>
+                          <th>Jenis Perusahaan</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>';
+                      $aaa = 0;
+                      foreach($mitra as $mitr){
+                      $aaa++;
+                      $namper = $mitr->NamaPerusahaan();
+                      // if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                      //         $link = "https";
+                      //     else
+                      //         $link = "http";
+
+                      //     $link .= "://";
+                      //     $link .= $_SERVER['HTTP_HOST'];
+                      //  $link .= $_SERVER['REQUEST_URI'];
+                      $fungsi = array();
+                      $fungsi[] = ChekDatas(1,$mitr);
+                      $fungsi[] = ChekDatas(2,$mitr);
+                      $fungsi[] = ChekDatas(3,$mitr);
+                      $fungsi[] = ChekDatas(4,$mitr);
+                      $fungsi[] = ChekDatas(5,$mitr);
+                      $fungsi[] = ChekDatas(6,$mitr);
+                      $fungsi[] = ChekDatas(7,$mitr);
+
+                      if (in_array(true, $fungsi)) {
+                        $nampert = true;
+                      }else {
+                        $nampert = false;
+                      }
+                      $juju = $mitr->IdKeyPerusahaan();
+                      //$nampert = $juju->IsAdaKurangan($mitr);
+                      $link ="../assets/index.php?assets=mitra&id_perusahaan=".$juju;
+                      $j=$_GET['jenis'];
+                      $jns=$mitr->jenis;
+                      if ($jns==$j) {
+                      echo "
+                      <tr>
+                          <td scope='row'>$aaa</td>
+                          <td>
+                              <div class='rincian dropdown dropright' >
+                              <i class='fa fa-bell-o' aria-hidden='true'></i>
+                              <a class='dropbtn' href='$link'>$namper</a>
+                                  <div class='dropdown-content'>
+                                      <a href='?assets=document'>Document</a>
+                                      <a href='?assets=tracking'>Tracking</a>
+                                  </div>
+                              </div>
+                          </td>
+                          <td>
+                              <!-- Default dropright button -->
+                              <div class='btn-group dropright'>
+                              <button type='button' class='btn btn-secondary dropdown-toggle' id='AdvancedSearch' data-toggle='dropdown'  style='background-color:#718CA1;color:#FFF;' > <span class='selection'>Pilih</span></button>
+                              <div class='dropdown-menu' id='dropdown' style='background-color:#718CA1;color:#FFF;'>
+                                  <li><a class='dropdown-item' href='#' data-value='F & B'>F & B</a></li>
+                                  <li><a class='dropdown-item' href='#' data-value='item2'>ITEM2</a></li>
+                                  <li><a class='dropdown-item' href='#' data-value='item3'>ITEM3</a></li>
+                                  <li><a class='dropdown-item' href='#' data-value='Cargo'>Cargo</a></li>
+                              </div>
+                              </div>
+                          </td>
+                          <td>";
+
+                          if($nampert){
+                              echo " <button class='btn btn-success' disabled><i class='fa fa-check' aria-hidden='true'></i></button>";
+                          }else {
+                              echo "<button class='btn btn-danger' disabled ><i class='fa fa-times' aria-hidden='true'></i></button>";
+                          }
+                  echo "
+                          </td>
+                      </tr>";
+                    }
+                  }
+                  echo'</tbody>
+              </table>
+          </div>
+      </div>';
+    }
+    elseif($t){
+        echo'
 
         <div class="card mt-5">
             <div class="card-header" style="text-align: center">
@@ -29,14 +125,14 @@ function Tabul($t,$idpo){
                         foreach($mitra as $mitr){
                         $aaa++;
                         $namper = $mitr->NamaPerusahaan();
-                        // if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') 
-                        //         $link = "https"; 
+                        // if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                        //         $link = "https";
                         //     else
-                        //         $link = "http"; 
-                            
-                        //     $link .= "://"; 
-                        //     $link .= $_SERVER['HTTP_HOST']; 
-                        //  $link .= $_SERVER['REQUEST_URI']; 
+                        //         $link = "http";
+
+                        //     $link .= "://";
+                        //     $link .= $_SERVER['HTTP_HOST'];
+                        //  $link .= $_SERVER['REQUEST_URI'];
                         $fungsi = array();
                         $fungsi[] = ChekDatas(1,$mitr);
                         $fungsi[] = ChekDatas(2,$mitr);
@@ -45,7 +141,7 @@ function Tabul($t,$idpo){
                         $fungsi[] = ChekDatas(5,$mitr);
                         $fungsi[] = ChekDatas(6,$mitr);
                         $fungsi[] = ChekDatas(7,$mitr);
-                    
+
                         if (in_array(true, $fungsi)) {
                           $nampert = true;
                         }else {
@@ -59,10 +155,8 @@ function Tabul($t,$idpo){
                             <td scope='row'>$aaa</td>
                             <td>
                                 <div class='rincian dropdown dropright' >
-                                    <span class='d-inline-block' tabindex='0' data-toggle='tooltip' title='Ini tempat tanggal nya'>
-                                        <i class='fa fa-bell-o' aria-hidden='true'></i>
-                                    </span>
-                                        <a class='dropbtn' href='$link'>$namper</a>
+                                <i class='fa fa-bell-o' aria-hidden='true'></i>
+                                <a class='dropbtn' href='$link'>$namper</a>
                                     <div class='dropdown-content'>
                                         <a href='?assets=document'>Document</a>
                                         <a href='?assets=tracking'>Tracking</a>
@@ -82,22 +176,23 @@ function Tabul($t,$idpo){
                                 </div>
                             </td>
                             <td>";
-                            
+
                             if($nampert){
-                                echo " <b style='color:green'>Lengkap</b>";
+                                echo " <button class='btn btn-success' disabled><i class='fa fa-check' aria-hidden='true'></i></button>";
                             }else {
-                                echo "<b style='color: red'>Tidak Lengkap</b>";
+                                echo "<button class='btn btn-danger' disabled ><i class='fa fa-times' aria-hidden='true'></i></button>";
                             }
                     echo "
                             </td>
                         </tr>";
-                        
+
                     }
                     echo'</tbody>
                 </table>
             </div>
         </div>';
-    }else{
+    }
+    else{
         $datane;
         foreach($mitra as $mitr){
             if($mitr->IdKeyPerusahaan()==$_GET['id_perusahaan']){
@@ -106,7 +201,7 @@ function Tabul($t,$idpo){
         }
         $namper = $datane->NamaPerusahaan();
         $filePerusahanae = $datane->FilePerusahaan();
-        echo '  
+        echo '
         <div class="card mt-5">
             <div class="card-header table-striped" style="text-align: center">';
                  echo"<h1>$namper</h1>";
@@ -120,7 +215,7 @@ function Tabul($t,$idpo){
                     <th>NO</th>
                     <th>Akta</th>
                     <th>TDP</th>
-                    <th>SIUP</th> 
+                    <th>SIUP</th>
                     <th>NPWP</th>
                     <th>SPPKP</th>
                     <th>KTP Direktur</th>
@@ -134,7 +229,7 @@ function Tabul($t,$idpo){
                     <td scope="row">1</td>
                     <td>';
                     ShowData(1,$haha );
-            
+
             echo'
                     </td>
                     <td>';
@@ -171,14 +266,14 @@ function Tabul($t,$idpo){
         ';
     }
                       }
-                      
+
                        if(isset($_GET['id_perusahaan'])){
                            Tabul(false,$_GET['id_perusahaan']);
                        }else{
                            Tabul(true,"");
                        }
                       ?>
-                     
+
                 <!-- Table keterangan perusahaan -->
     </div>
             <?php tablePerusahaanMitra();?>
@@ -187,8 +282,8 @@ function Tabul($t,$idpo){
 <script type="text/javascript">
     $(document).ready(function(){
         $('#rincian').click(function(){
-            $('.menu').toggle("slide");  
-        }); 
+            $('.menu').toggle("slide");
+        });
     });
 
     $(function () {
@@ -198,7 +293,7 @@ function Tabul($t,$idpo){
 });
 </script>
 
-<?php 
+<?php
     if(isset($_POST['namaPerusahaan'])){
         TambahDataPerusahaan($_POST['namaPerusahaan']);
     }
@@ -220,11 +315,11 @@ function Tabul($t,$idpo){
                               <div class='input-group-append'>
                                 <input type='submit' value ='Submit'<span class='input-group-text' id=''></span>
                               </div>
-                              
+
                             </div>
                             </div>
                             </form>
-                            "; 
+                            ";
     }
     function ShowData($ni,$haha){
         $filen = array();
@@ -254,7 +349,7 @@ function Tabul($t,$idpo){
                         }
                     }
     }
-    
+
     function ChekDatas($jenisfile,$filperus){
     $kan = $filperus->fileperushaan;
     $fungsi = array();
